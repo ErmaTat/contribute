@@ -1,8 +1,8 @@
 <!-- partial:../../partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-      <a class="sidebar-brand brand-logo" href="../../index.html"><img src="../../assets/images/logo.svg" alt="logo" /></a>
-      <a class="sidebar-brand brand-logo-mini" href="../../index.html"><img src="../../assets/images/logo-mini.svg" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo" href="../../index.html"><img src="{{ asset('assets/images/logo.svg')}}" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo-mini" href="../../index.html"><img src="{{ asset('assets/images/logo-mini.svg')}}" alt="logo" /></a>
     </div>
     <ul class="nav">
       <li class="nav-item profile">
@@ -13,8 +13,8 @@
               <span class="count bg-success"></span>
             </div>
             <div class="profile-name">
-              <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-              <span>Gold Member</span>
+              <h5 class="mb-0 font-weight-normal">{{Auth::user()->name}}</h5>
+              <span>Admin</span>
             </div>
           </div>
           <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
@@ -70,9 +70,56 @@
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('contribution.index')}}">
           <span class="menu-icon">
-            <i class="mdi mdi-speedometer"></i>
+            <i class="mdi mdi-cash"></i>
           </span>
-          <span class="menu-title">Contributions</span>
+          <span class="menu-title">Contributions|Projects</span>
+        </a>
+      </li>
+
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="#">
+          <span class="menu-icon">
+            <i class="mdi mdi-calendar"></i>
+          </span>
+          <span class="menu-title">Calendar</span>
+        </a>
+      </li>
+
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="#">
+          <span class="menu-icon">
+            <i class="mdi mdi-chart-pie"></i>
+          </span>
+          <span class="menu-title">Reports</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-category">
+        <span class="nav-link">Others</span>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="#">
+          <span class="menu-icon">
+            <i class="mdi mdi-settings"></i>
+          </span>
+          <span class="menu-title">Settings</span>
+        </a>
+      </li>
+
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="#">
+          <span class="menu-icon">
+            <i class="mdi mdi-account"></i>
+          </span>
+          <span class="menu-title">Users</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="#">
+          <span class="menu-icon">
+            <i class="mdi mdi-file"></i>
+          </span>
+          <span class="menu-title">Documentation</span>
         </a>
       </li>
      
