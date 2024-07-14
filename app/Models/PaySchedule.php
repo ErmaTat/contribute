@@ -9,6 +9,10 @@ class PaySchedule extends Model
 {
     use HasFactory;
     protected $fillable=['user_id','contribution_id','status'];
+    protected $attributes=[
+       
+
+    ];
 
     public function users()
     {
@@ -17,6 +21,6 @@ class PaySchedule extends Model
 
     public function contributions()
     {
-        return $this->belongsTo(Contribution::class);
+        return $this->belongsTo(Contribution::class)->withTimestamps();
     }
 }

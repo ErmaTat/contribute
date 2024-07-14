@@ -94,6 +94,15 @@
         </a>
       </li>
 
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="#">
+          <span class="menu-icon">
+            <i class="mdi mdi-credit-card"></i>
+          </span>
+          <span class="menu-title">Transactions</span>
+        </a>
+      </li>
+
       <li class="nav-item nav-category">
         <span class="nav-link">Others</span>
       </li>
@@ -107,7 +116,7 @@
       </li>
 
       <li class="nav-item menu-items">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('users.index')}}">
           <span class="menu-icon">
             <i class="mdi mdi-account"></i>
           </span>

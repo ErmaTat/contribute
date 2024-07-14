@@ -49,4 +49,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaySchedule::class);
     }
+
+    public function contributions()
+    {
+        return $this->belongsToMany(Contribution::class,'user_contributions')->withTimestamps();
+    }
+
+    public function payments()
+    {
+        return $this->belongsToMany(Contribution::class,'pay_schedules')->withTimestamps();
+    }
 }

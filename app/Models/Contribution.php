@@ -28,4 +28,14 @@ class Contribution extends Model
     {
         return $this->hasMany(PaySchedule::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_contributions')->withTimestamps();
+    }
+
+    public function payments()
+    {
+        return $this->belongsToMany(User::class,'pay_schedules')->withTimestamps();
+    }
 }
