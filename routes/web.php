@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     ProfileController,
     DashboardController,
     ContributionController,
+    SettingController,
     UserController
 };
 use Illuminate\Support\Facades\Route;
@@ -20,17 +21,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/contributions/store', [ContributionController::class, 'store'])->name('contribution.store');
     Route::get('/contribution/{id}', [ContributionController::class, 'show'])->name('contribution.show');
     Route::put('/contribution/update/{id}', [ContributionController::class, 'update'])->name('contribution.update');
+    Route::put('/payment/update', [ContributionController::class, 'update_pay'])->name('payment.update');
+
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
     Route::post('/users/assign/{id}', [UserController::class, 'assign'])->name('users.assign');
+    Route::post('/users/role', [UserController::class, 'role'])->name('users.role');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::post('/assignrole', [UserController::class, 'assign_role'])->name('users.assign_role');
 
 
 
-
-
-
-
+    Route::get('/settings', [SettingController::class, 'index'])->name('setting.index');
+    
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

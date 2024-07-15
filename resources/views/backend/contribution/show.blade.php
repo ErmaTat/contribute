@@ -32,346 +32,363 @@
     </style>
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-md-4 grid-margin ">
-            <div class="card">
+<div class="row">
+    <div class="col-md-4 grid-margin ">
+        <div class="card">
 
-                <div class="card-body">
-                    <div class='d-flex justify-content-between mb-4'>
-                        <h4 class="card-title text-uppercase">{{ $contribution->name }}</h4>
-                        <p class="text-muted mb-1 small">
-                            <button class="btn btn-sm btn-primary" data-target="#edit-project" data-toggle="modal"><i
-                                    class="mdi mdi-border-color"></i>Edit</button>
-                        </p>
-                    </div>
-                    <div class="d-flex flex-wrap ">
-                        <div class="me-5">
-                            <p class="text-nowrap"><i class="mdi mdi-folder-multiple-outline bx-sm me-2"></i> Project Name:
-                                {{ $contribution->name }} </p>
-                            <p class="text-nowrap"><i class="mdi mdi-map-marker bx-sm me-2"></i> Invite Code:
-                                {{ $contribution->contribution_address }}</p>
-                            <p class="text-nowrap "><i class="mdi mdi-label bx-sm me-2"></i> Type:
-                                {{ $contribution->contribution_type }}</p>
-                            <p class="text-nowrap"><i class="mdi mdi-calendar-today bx-sm me-2"></i> Starts:
-                                {{ $contribution->starts }}</p>
-                            <p class="text-nowrap "><i class="mdi mdi-calendar bx-sm me-2"></i> Ends:
-                                {{ $contribution->ends }}</p>
-                            <p class="text-nowrap "><i class="mdi mdi-account-box bx-sm me-2"></i> Created By: </p>
-                            <p class="text-nowrap "><button class="btn btn-sm btn-icon btn-outline-danger"> <i
-                                        class="mdi mdi-delete bx-sm me-2 warning"></i></button> </p>
-                        </div>
+            <div class="card-body">
+                <div class='d-flex justify-content-between mb-4'>
+                    <h4 class="card-title text-uppercase">{{ $contribution->name }}</h4>
+                    <p class="text-muted mb-1 small">
+                        <button class="btn btn-sm btn-primary" data-target="#edit-project" data-toggle="modal"><i
+                                class="mdi mdi-border-color"></i>Edit</button>
+                    </p>
+                </div>
+                <div class="d-flex flex-wrap ">
+                    <div class="me-5">
+                        <p class="text-nowrap"><i class="mdi mdi-folder-multiple-outline bx-sm me-2"></i> Project Name:
+                            {{ $contribution->name }} </p>
+                        <p class="text-nowrap"><i class="mdi mdi-map-marker bx-sm me-2"></i> Invite Code:
+                            {{ $contribution->contribution_address }}</p>
+                        <p class="text-nowrap "><i class="mdi mdi-label bx-sm me-2"></i> Type:
+                            {{ $contribution->contribution_type }}</p>
+                        <p class="text-nowrap"><i class="mdi mdi-calendar-today bx-sm me-2"></i> Starts:
+                            {{ $contribution->starts }}</p>
+                        <p class="text-nowrap "><i class="mdi mdi-calendar bx-sm me-2"></i> Ends:
+                            {{ $contribution->ends }}</p>
+                        <p class="text-nowrap "><i class="mdi mdi-account-box bx-sm me-2"></i> Created By: </p>
+                        <p class="text-nowrap "><button class="btn btn-sm btn-icon btn-outline-danger"> <i
+                                    class="mdi mdi-delete bx-sm me-2 warning"></i></button> </p>
                     </div>
                 </div>
             </div>
-            <div class="card mt-4">
-                <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                        <h4 class="card-title">Transaction Logs</h4>
-                        <p class="text-muted mb-1 small">
-                            <button class="btn btn-sm btn-primary" data-target="#confirm-payment" data-toggle="modal"><i
-                                    class="mdi mdi-checkbox-marked-circle-outline"></i>Confirm</button>
-                        </p>
-                    </div>
-                    <div class="preview-list">
-                        <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <img src="assets/images/faces/face6.jpg" alt="image" class="rounded-circle" />
-                            </div>
-                            <div class="preview-item-content d-flex flex-grow">
-                                <div class="flex-grow">
-                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                        <h6 class="preview-subject">Leonard</h6>
-                                        <p class="text-muted text-small">5 minutes ago</p>
-                                    </div>
-                                    <p class="text-muted">Well, it seems to be working now.</p>
+        </div>
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title">Transaction Logs</h4>
+                    <p class="text-muted mb-1 small">
+                        <button class="btn btn-sm btn-primary" data-target="#confirm-payment" data-toggle="modal"><i
+                                class="mdi mdi-checkbox-marked-circle-outline"></i>Confirm</button>
+                    </p>
+                </div>
+                <div class="preview-list">
+                    <div class="preview-item border-bottom">
+                        <div class="preview-thumbnail">
+                            <img src="assets/images/faces/face6.jpg" alt="image" class="rounded-circle" />
+                        </div>
+                        <div class="preview-item-content d-flex flex-grow">
+                            <div class="flex-grow">
+                                <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                    <h6 class="preview-subject">Leonard</h6>
+                                    <p class="text-muted text-small">5 minutes ago</p>
                                 </div>
+                                <p class="text-muted">Well, it seems to be working now.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 grid-margin ">
-            <div class="card">
-                <div class="card-body">
-                    <div class='d-flex justify-content-between mb-4'>
-                        <h4 class="card-title text-uppercase">Contributed: ₦0</h4>
-                        <div class="text-muted mb-1 small d-flex flex-row ">
+    </div>
+    <div class="col-md-8 grid-margin ">
+        <div class="card">
+            <div class="card-body">
+                <div class='d-flex justify-content-between mb-4'>
+                    <h4 class="card-title text-uppercase">Contributed: ₦{{ number_format($sum) }}</h4>
+                    <div class="text-muted mb-1 small d-flex flex-row ">
 
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenuButton1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                        class="mdi mdi-settings"></i>Options</button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <button class="dropdown-item " onmouseover="this.style.color='white'"
-                                        data-target="#search-user" data-toggle="modal"><i class="mdi mdi-settings"></i> Add
-                                        Contributor</button>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenuButton1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                    class="mdi mdi-settings"></i>Options</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <button class="dropdown-item " onmouseover="this.style.color='white'"
+                                    data-target="#search-user" data-toggle="modal"><i class="mdi mdi-settings"></i> Add
+                                    Contributor</button>
 
-
+                                <div class="dropdown-item ">
+                                    <span><i class="mdi mdi-table"></i> Table Type</span>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                          <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" checked value=""> List</label>
+                                        </div>
+                                        <div class="form-check">
+                                          <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" > Calendar </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
+                <div class="table-responsive">
+                    {{-- <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th> S/N </th>
+                                <th> Contributor </th>
+                                <th> Amount Paid </th>
+                                <th> Last Payment </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($contribution->users as $index => $user)
                                 <tr>
-                                    <th> S/N </th>
-                                    <th> Contributor </th>
-                                    <th> Amount Paid </th>
-                                    <th> Last Payment </th>
-                                    <th> </th>
+                                    <td> {{ $index + 1 }}. </td>
+                                    <td> {{ $user->name }} </td>
+                                    <td>
+                                        ₦{{ number_format($user->pay_schedules[0]->amount) }}
+                                    </td>
+                                    <td> {{ $user->payments[0]->updated_at->format('jS, F Y h:iA') }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger "><i class="mdi mdi-delete"></i></button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($contribution->users as $index => $user)
-                                    <tr>
-                                        <td> {{ $index + 1 }}. </td>
-                                        <td> {{ $user->name }} </td>
-                                        <td>
-                                            ₦{{ number_format($user->payments[0]->amount) }}
-                                        </td>
-                                        <td> {{ $user->payments[0]->updated_at->format('jS, F Y h:iA') }}</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-danger "><i class="mdi mdi-delete"></i></button>
-                                        </td>
-                                    </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table> --}}
+
+                    <table class="table2 table table-bordered">
+                        <thead>
+                            <tr>
+                                <th> User/Date </th>
+                                @foreach ($dates as $date)
+                                    <th>{!! $date !!}</th>
                                 @endforeach
-
-
-                            </tbody>
-                        </table>
-
-                        {{-- <table2 class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th> User/Date </th>
-                                    @foreach ($dates as $date)
-                                        <th>{!! $date !!}</th>
-                                    @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>User 1</td>
-                                    @foreach ($dates as $date)
-                                        <td></td>
-                                    @endforeach
-                                </tr>
-
-                            </tbody>
-                        </table> --}}
-                    </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($contribution->users as $user)
+                            <tr>
+                                <td>{{$user->name}}</td>
+                                @foreach ($dates as $date)
+                                    <td class=""></td>
+                                @endforeach
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="edit-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ $contribution->name }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form class="forms-sample" method="POST" action="{{ route('contribution.update', $contribution->id) }}">
-                    <div class="modal-body">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="project_name">Project Name *:</label>
-                            <input type="text" class="form-control" id="project_name" required name="name"
-                                placeholder="Project/Contribution Name" value="{{ $contribution->name }}">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-form-label">Starts *: </label>
-                                    <input class="form-control" type="date" required name="starts"
-                                        placeholder="dd/mm/yyyy" value="{{ $contribution->starts }}" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group ">
-                                    <label class="col-form-label">Ends *: </label>
-                                    <input class="form-control" type="date" name="ends" required
-                                        placeholder="dd/mm/yyyy" value="{{ $contribution->ends }}" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Project Description</label>
-                            <textarea class="form-control" name="description" placeholder="Project Description/Details" id="description"
-                                rows="4">{{ $contribution->description }}</textarea>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="con_type">Project Contribution Type *: </label>
-                            <select class="form-control" disabled id="con_type" required name="">
-
-                                <option value="recurring"
-                                    {{ $contribution->contribution_type == 'recurring' ? 'selected' : '' }}>Recurring
-                                    Contributions</option>
-                                <option value="one-time"
-                                    {{ $contribution->contribution_type == 'one-time' ? 'selected' : '' }}>One-Time
-                                    Contributions</option>
-                            </select>
-                            <input type="hidden" value="{{ $contribution->contribution_type }}"
-                                name="contribution_type">
-                        </div>
-                        <hr>
-
-                        @if ($contribution->contribution_type == 'recurring')
-                            <div id="con_options">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Payment Frequency: </label>
-                                            <select class="form-control" id="freq" name="frequency"
-                                                style="color: white">
-                                                <option value="none">None</option>
-                                                <option value="weekly">Weekly</option>
-                                                <option value="monthly">Monthly</option>
-                                                <option value="quarterly">Quarterly</option>
-                                                <option value="annually">Annually</option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Payment Duration : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <select class="form-control" id="" name="duration_type"
-                                                        style="color: white">
-                                                        <option>Days</option>
-                                                        <option>Weeks</option>
-                                                        <option>Months</option>
-                                                    </select>
-                                                </div>
-                                                <input type="number" value="30" class="form-control"
-                                                    name="duration" placeholder="Duration Amount" aria-label=""
-                                                    aria-describedby="basic-addon1">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Payment Type : </label>
-                                            <select class="form-control" id="pay_type" style="color: white">
-                                                <option value="fixed">Fixed Amount</option>
-                                                <option value="custom">Custom/Random Amount</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Amount : </label>
-                                            <input type="text" class="form-control" value="500" id="amt"
-                                                name="amount" placeholder="Amount NGN">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-
-
-
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+<!-- Modal -->
+<div class="modal fade" id="edit-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ $contribution->name }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="confirm-payment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Payment for {{ $contribution->name }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form class="forms-sample" method="POST"
-                    action="{{ route('contribution.update', $contribution->id) }}">
-                    <div class="modal-body">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="project_name">Contributor *:</label>
-                            <input type="text" class="form-control" id="contributor" required name="name"
-                                placeholder="Contributor">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-form-label">Amount *: </label>
-                                    <input type="number" class="form-control" id="amount" required name="amount"
-                                        placeholder="Amount Paid">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group ">
-                                    <label class="col-form-label">Paid On *: </label>
-                                    <input class="form-control" type="date" name="paid-on" required
-                                        placeholder="dd/mm/yyyy" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="search-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Contributor for {{ $contribution->name }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form class="forms-sample" method="POST" action="{{ route('users.assign', $contribution->id) }}">
+            <form class="forms-sample" method="POST" action="{{ route('contribution.update', $contribution->id) }}">
+                <div class="modal-body">
                     @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="project_name">Contributor :</label>
-                            <select class="js-example-basic-multiple" required name='users[]' multiple="multiple"
-                                style="width:100%;">
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="project_name">Project Name *:</label>
+                        <input type="text" class="form-control" id="project_name" required name="name"
+                            placeholder="Project/Contribution Name" value="{{ $contribution->name }}">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Starts *: </label>
+                                <input class="form-control" type="date" required name="starts"
+                                    placeholder="dd/mm/yyyy" value="{{ $contribution->starts }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="col-form-label">Ends *: </label>
+                                <input class="form-control" type="date" name="ends" required
+                                    placeholder="dd/mm/yyyy" value="{{ $contribution->ends }}" />
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">Add</button>
+                    <div class="form-group">
+                        <label for="description">Project Description</label>
+                        <textarea class="form-control" name="description" placeholder="Project Description/Details" id="description"
+                            rows="4">{{ $contribution->description }}</textarea>
                     </div>
-                </form>
-            </div>
+
+
+                    <div class="form-group">
+                        <label for="con_type">Project Contribution Type *: </label>
+                        <select class="form-control" disabled id="con_type" required name="">
+
+                            <option value="recurring"
+                                {{ $contribution->contribution_type == 'recurring' ? 'selected' : '' }}>Recurring
+                                Contributions</option>
+                            <option value="one-time"
+                                {{ $contribution->contribution_type == 'one-time' ? 'selected' : '' }}>One-Time
+                                Contributions</option>
+                        </select>
+                        <input type="hidden" value="{{ $contribution->contribution_type }}"
+                            name="contribution_type">
+                    </div>
+                    <hr>
+
+                    @if ($contribution->contribution_type == 'recurring')
+                        <div id="con_options">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Payment Frequency: </label>
+                                        <select class="form-control" id="freq" name="frequency"
+                                            style="color: white">
+                                            <option value="none">None</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="quarterly">Quarterly</option>
+                                            <option value="annually">Annually</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Payment Duration : </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <select class="form-control" id="" name="duration_type"
+                                                    style="color: white">
+                                                    <option>Days</option>
+                                                    <option>Weeks</option>
+                                                    <option>Months</option>
+                                                </select>
+                                            </div>
+                                            <input type="number" value="30" class="form-control"
+                                                name="duration" placeholder="Duration Amount" aria-label=""
+                                                aria-describedby="basic-addon1">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Payment Type : </label>
+                                        <select class="form-control" id="pay_type" style="color: white">
+                                            <option value="fixed">Fixed Amount</option>
+                                            <option value="custom">Custom/Random Amount</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Amount : </label>
+                                        <input type="text" class="form-control" value="500" id="amt"
+                                            name="amount" placeholder="Amount NGN">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+
+
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="confirm-payment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment for {{ $contribution->name }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="forms-sample" method="POST"
+                action="{{ route('payment.update') }}">
+                <div class="modal-body">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="project_name">Contributor *:</label>
+                        <select class="form-control" name="user_id" style="color: white">
+                           @foreach ($contribution->users as $user)
+                               <option value="{{$user->id}}">{{$user->name}}</option>
+                           @endforeach
+                        </select>
+                        <input type="hidden" class="form-control" name="contribution_id" value="{{$contribution->id}}">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Amount *: </label>
+                                <input type="number" class="form-control" required name="amount"
+                                    placeholder="Amount Paid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="col-form-label">Paid On *: </label>
+                                <input class="form-control" type="date" name="paid-on" required
+                                    placeholder="dd/mm/yyyy" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Update Payments</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="search-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Contributor for {{ $contribution->name }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="forms-sample" method="POST" action="{{ route('users.assign', $contribution->id) }}">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="project_name">Contributor :</label>
+                        <select class="js-example-basic-multiple" required name='users[]' multiple="multiple"
+                            style="width:100%;">
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 @endsection

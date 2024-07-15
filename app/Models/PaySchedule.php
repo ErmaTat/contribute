@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaySchedule extends Model
 {
     use HasFactory;
-    protected $fillable=['user_id','contribution_id','status'];
+    protected $fillable=['user_id','contribution_id','status','amount','paid_on'];
     protected $attributes=[
        
 

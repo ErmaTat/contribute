@@ -30,16 +30,14 @@
                         <td> {{$index +1}}.  </td>
                         <td> {{$user->name}} </td>
                         <td> {{$user->email }}</td>
-                        <td> </td>
+                        <td> {{ucfirst($user->roles[0]->name)}}</td>
                         <td> {{$user->created_at}} </td>
                         <td> 
-                            <a href="{{route('contribution.show',$user->id)}}" class="btn btn-sm btn-primary"><i class="mdi mdi-eye"></i>View</a>
+                            <a href="{{route('users.show',$user->id)}}" class="btn btn-sm btn-primary"><i class="mdi mdi-eye"></i>View</a>
                             <button class="btn btn-sm btn-danger"><i class="mdi mdi-delete"></i>Delete</button>
                         </td>
                       </tr>
                     @endforeach
-                
-                 
                 </tbody>
               </table>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contribution;
 use App\Models\User;
+use App\Models\PaySchedule;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -55,7 +56,7 @@ class ContributionController extends Controller
         $dates = [];
         $startOfWeek = Carbon::now()->startOfWeek(); // Assuming the week starts on Monday
 
-        for ($i = 0; $i < 7; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $date = $startOfWeek->copy()->addDays($i);
             $day = $date->day;
             $month = $date->format('F');
@@ -72,10 +73,12 @@ class ContributionController extends Controller
 
             $dates[] = "{$day}<sup>{$suffix}</sup> {$month}";
         }
+        $contribution=Contribution::find($id);
         $data = [
-            'contribution' => Contribution::find($id),
+            'contribution' => $contribution,
             'dates'=>$dates,
-            'users'=>User::all()
+            'users'=>User::all(),
+            'sum'=>$contribution->pay_schedules->sum('amount')
         ];
         return view('backend.contribution.show', $data);
     }
@@ -91,6 +94,37 @@ class ContributionController extends Controller
         $cont=Contribution::find($id);
         $cont->update($request->all());
         return redirect()->back()->with('success', 'Project/Contribution details updated successfully');
+    }
+
+    public function update_pay(Request $request)
+    {
+       $reply=$this->update_payments($request->all());
+       if($reply==true){
+        return redirect()->back()->with('success','Payment updated successfully');
+       }else{
+        return redirect()->back()->with('error','Payment Update Error');
+       }
+    }
+
+    private function update_payments($data)
+    {   
+        $contribution=Contribution::find($data['contribution_id']);
+        try {
+            if($contribution->contribution_type =='one-time'){
+                $pay=PaySchedule::where('user_id',$data['user_id'])->where('contribution_id',$data['contribution_id'])->first();
+                $pay->update([
+                    'amount' => $data['amount']+$pay->amount,
+                    'paid_on' => $data['paid-on'],
+                ]);
+            }else{
+              
+            }
+            return true;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return false;
+        }
+        
     }
 
     
