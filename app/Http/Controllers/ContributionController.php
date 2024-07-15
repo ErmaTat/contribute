@@ -54,34 +54,44 @@ class ContributionController extends Controller
     public function show(string $id)
     {
         $dates = [];
-        $startOfWeek = Carbon::now()->startOfWeek(); // Assuming the week starts on Monday
-
-        for ($i = 0; $i < 30; $i++) {
+        $raw_dates = [];
+        $startOfWeek = Carbon::now()->startOfWeek();
+    
+        for ($i = 0; $i < 7; $i++) {
             $date = $startOfWeek->copy()->addDays($i);
             $day = $date->day;
             $month = $date->format('F');
-
-            if ($day % 10 == 1 && $day != 11) {
-                $suffix = 'st';
-            } elseif ($day % 10 == 2 && $day != 12) {
-                $suffix = 'nd';
-            } elseif ($day % 10 == 3 && $day != 13) {
-                $suffix = 'rd';
-            } else {
-                $suffix = 'th';
-            }
-
+            $suffix = $this->getDaySuffix($day);
+            
             $dates[] = "{$day}<sup>{$suffix}</sup> {$month}";
+            $raw_dates[] = $date->format('Y-m-d');
         }
-        $contribution=Contribution::find($id);
+    
+        $contribution = Contribution::with('users', 'pay_schedules')->findOrFail($id);
         $data = [
             'contribution' => $contribution,
-            'dates'=>$dates,
-            'users'=>User::all(),
-            'sum'=>$contribution->pay_schedules->sum('amount')
+            'dates' => $dates,
+            'raw_dates' => $raw_dates,
+            'users' => User::all(),
+            'sum' => $contribution->pay_schedules->sum('amount')
         ];
+    
         return view('backend.contribution.show', $data);
     }
+    
+    private function getDaySuffix($day)
+    {
+        if ($day % 10 == 1 && $day != 11) {
+            return 'st';
+        } elseif ($day % 10 == 2 && $day != 12) {
+            return 'nd';
+        } elseif ($day % 10 == 3 && $day != 13) {
+            return 'rd';
+        } else {
+            return 'th';
+        }
+    }
+    
 
     public function update(Request $request,string $id)
     {
@@ -108,22 +118,13 @@ class ContributionController extends Controller
 
     private function update_payments($data)
     {   
-        $contribution=Contribution::find($data['contribution_id']);
-        try {
-            if($contribution->contribution_type =='one-time'){
-                $pay=PaySchedule::where('user_id',$data['user_id'])->where('contribution_id',$data['contribution_id'])->first();
-                $pay->update([
-                    'amount' => $data['amount']+$pay->amount,
-                    'paid_on' => $data['paid-on'],
-                ]);
-            }else{
-              
-            }
-            return true;
-        } catch (\Throwable $th) {
-            //throw $th;
-            return false;
-        }
+        PaySchedule::create([
+            'user_id'=>$data['user_id'],
+            'contribution_id'=>$data['contribution_id'],
+            'amount'=>$data['amount'],
+            'paid_on' => $data['paid-on'],
+        ]);
+        return true;
         
     }
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     ProfileController,
     DashboardController,
     ContributionController,
+    PaymentController,
     SettingController,
     UserController
 };
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/contribution/{id}', [ContributionController::class, 'show'])->name('contribution.show');
     Route::put('/contribution/update/{id}', [ContributionController::class, 'update'])->name('contribution.update');
     Route::put('/payment/update', [ContributionController::class, 'update_pay'])->name('payment.update');
+    Route::post('/InitiatePayment', [PaymentController::class, 'paymentGateway'])->name('payment.pay');
+
 
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
