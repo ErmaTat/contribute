@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contribution;
+use App\Models\Log;
 use App\Models\PaySchedule;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -39,7 +40,21 @@ class PaymentController extends Controller
                 'paid_on' => Carbon::today(),
             ]);
 
+            Log::create([
+                'user_id'=>Auth::id(),
+                'contribution_id'=>$request->contribution_id,
+                'event'=> Auth::user()->name." made a payment of ₦ ".number_format($request->amount)
+            ]);
+
             return back()->withError('The paystack token has expired. Please refresh the page and try again.');
         }
+    }
+
+    public function receipt(string $id)
+    {
+        $data=[
+            'payments'=>PaySchedule::find($id)
+        ];
+        return view('backend.contribution.receipt',$data);
     }
 }

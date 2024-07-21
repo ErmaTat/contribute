@@ -3,7 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" /> --}}
     <style>
         .table-responsive {
             overflow-x: auto;
@@ -57,10 +57,12 @@
                             <p class="text-nowrap "><i class="mdi mdi-calendar bx-sm me-2"></i> Ends:
                                 {{ $contribution->ends }}</p>
                             <p class="text-nowrap "><i class="mdi mdi-account-box bx-sm me-2"></i> Created By: </p>
-                            <p class="text-nowrap "><button class="btn btn-sm btn-icon btn-outline-danger"> <i
+                            <div class="text-nowrap "><button class="btn btn-sm btn-icon btn-outline-danger"> <i
                                         class="mdi mdi-delete bx-sm me-2 "></i></button>
-                                        <button title="Reminders" class="btn btn-sm btn-icon btn-outline-primary"> <i
-                                            class="mdi mdi-bell bx-sm me-2 "></i></button> </p>
+                                <button title="Reminders"
+                                    class="btn btn-sm btn-icon btn-outline-primary"data-target="#add-reminder"
+                                    data-toggle="modal" id="reminders"> <i class="mdi mdi-bell bx-sm me-2 "></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,20 +77,25 @@
                         </p>
                     </div>
                     <div class="preview-list">
-                        <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <img src="assets/images/faces/face6.jpg" alt="image" class="rounded-circle" />
-                            </div>
-                            <div class="preview-item-content d-flex flex-grow">
-                                <div class="flex-grow">
-                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                        <h6 class="preview-subject">Leonard</h6>
-                                        <p class="text-muted text-small">5 minutes ago</p>
+                        @if ($logs->isEmpty())
+                            <p>No logs available yet.</p>
+                        @else
+                            @foreach ($logs as $log)
+                                <div class="preview-item border-bottom">
+                                    <div class="preview-item-content d-flex flex-grow">
+                                        <div class="flex-grow">
+                                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                                <h6 class="preview-subject">Payments</h6>
+                                                <p class="text-muted text-small">{{ $log->created_at->diffForHumans() }}</p>
+                                            </div>
+                                            <p class="text-muted">{{ $log->event }}</p>
+                                        </div>
                                     </div>
-                                    <p class="text-muted">Well, it seems to be working now.</p>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
+
+
                     </div>
                 </div>
             </div>
@@ -97,9 +104,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class='d-flex justify-content-between mb-4'>
-                        <h4 class="card-title text-uppercase">Contributed: ₦{{ number_format($sum) }}</h4>
+                        <h4 class="card-title text-uppercase">Contributed: ₦ {{ number_format($sum) }}</h4>
                         <div class="text-muted mb-1 small d-flex flex-row ">
-
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenuButton1"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -108,18 +114,18 @@
                                     <button class="dropdown-item " onmouseover="this.style.color='white'"
                                         data-target="#search-user" data-toggle="modal"><i class="mdi mdi-settings"></i> Add
                                         Contributor</button>
-
+            
                                     <div class="dropdown-item " onmouseover="this.style.color='white'">
                                         <span><i class="mdi mdi-table"></i> Table Type</span>
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    <input type="radio" class="form-check-input" name="table-type"
                                                         id="optionsRadios1" checked value=""> List</label>
                                             </div>
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    <input type="radio" class="form-check-input" name="table-type"
                                                         id="optionsRadios2" value="option2"> Calendar </label>
                                             </div>
                                         </div>
@@ -128,16 +134,16 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
+            
+                    <div class="table-responsive" style="width: 100%">
+                        <table class="table table-bordered" id="list-table">
                             <thead>
                                 <tr>
                                     <th> S/N </th>
                                     <th> Contributor </th>
                                     <th> Amount Paid </th>
                                     <th> Last Payment </th>
-                                    <th> Receipt</th>
+                                    <th> Receipts</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -146,20 +152,26 @@
                                         <td> {{ $index + 1 }}. </td>
                                         <td> {{ $user->name }} </td>
                                         <td>
-                                            ₦ {{ number_format($user->pay_schedules->sum('amount')) }}
+                                            ₦
+                                            {{ number_format($user->getPaySchedulesForContribution($contribution->id)->sum('amount')) }}
                                         </td>
-                                        <td> {{ $user->payments[0]->updated_at->format('jS, F Y h:iA') }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info p-1"><i class="mdi mdi-receipt"></i></button>
+                                            @if ($user->payments->isNotEmpty())
+                                                {{ $user->payments[0]->updated_at->format('jS, F Y h:iA') }}
+                                            @else
+                                                No payments yet
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{$user->payments->isNotEmpty()?route('payment.receipt',$user->payments[0]->id):'#'}}" class="btn btn-sm btn-info p-1"><i
+                                                    class="mdi mdi-receipt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
-
-
                             </tbody>
                         </table>
-
-                        {{-- <table class="table2 table table-bordered">
+            
+                        <table class="table2 table table-bordered" style="display: none" id="calendar-table">
                             <thead>
                                 <tr>
                                     <th>User/Date</th>
@@ -201,12 +213,11 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table> --}}
-
-
+                        </table>
                     </div>
                 </div>
             </div>
+            
 
         </div>
     </div>
@@ -421,13 +432,103 @@
     </div>
 
 
+    <div class="modal fade" id="add-reminder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Set Reminders for {{ $contribution->name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="forms-sample" method="POST" action="{{ route('reminder.store') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="project_name">Reminder Details :</label>
+                            <textarea name="" id="" class="form-control" placeholder="Reminder Message (Optional)"
+                                rows="4"></textarea>
+                            <input type="hidden" class="form-control" name="contribution_id"
+                                value="{{ $contribution->id }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="project_name">Reminder Settings *:</label>
+                            <select class="form-control" name="" style="color: white">
+                                <option value="default">Default</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Starts *: </label>
+                                    <input class="form-control" type="date" required name="starts"
+                                        placeholder="dd/mm/yyyy" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-form-label">Frequency : </label>
+                                    <select class="form-control" name="" style="color: white">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <div class="form-check form-check-danger mb-2" style="margin-right: 15px;">
+                                <input class="form-check-input" type="checkbox" id="select-all" data-value="personal" />
+                                <label class="form-check-label" for="select-all">All Users</label>
+                            </div>
+
+                            @foreach ($contribution->users as $user)
+                                <div class="form-check form-check-danger mb-2" style="margin-right: 15px;">
+                                    <input class="form-check-input" type="checkbox" name='user_id[]'
+                                        value="{{ $user->id }}" data-value="personal" />
+                                    <label class="form-check-label" for="select-personal">{{ $user->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Set</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    {{-- <script src="{{ asset('assets/vendors/sweetalert/sweetalert2.js') }}"></script> --}}
     <script>
+        // Swal.fire({
+        //     text: "Are you sure?, You won't be able to revert this!",
+        //     icon: "warning",
+        //     showCancelButton: true,
+        //     confirmButtonText: "Yes, remove it!",
+        //     customClass: {
+        //         confirmButton: "btn btn-primary me-3",
+        //         cancelButton: "btn btn-secondary"
+        //     },
+        //     buttonsStyling: false
+        // }).then(function(result) {
+        //     if (result.value) {
+        //         form.submit();
+        //     }
+        // });
+
+
         if ($("#transaction-history").length) {
             var areaData = {
                 labels: ["Paypal", "Stripe", "Cash"],
@@ -516,6 +617,37 @@
             }).then(function(result) {
                 if (result.value) {
                     form.submit();
+                }
+            });
+        });
+
+        $('input[name="table-type"]').change(function() {
+            if ($('#optionsRadios1').is(':checked')) {
+                $('#list-table').css('display', '');
+                $('#calendar-table').css('display', 'none');
+
+            } else if ($('#optionsRadios2').is(':checked')) {
+                $('#list-table').css('display', 'none');
+                $('#calendar-table').css('display', '');
+
+            }
+        });
+
+        $(document).ready(function() {
+            $('#select-all').change(function() {
+
+                var isChecked = $(this).is(':checked');
+
+                $('input[name="user_id[]"]').prop('checked', isChecked);
+            });
+
+            $('input[name="user_id[]"]').change(function() {
+                // If all user checkboxes are checked, check the "All Users" checkbox
+                // Otherwise, uncheck the "All Users" checkbox
+                if ($('input[name="user_id[]"]:checked').length === $('input[name="user_id[]"]').length) {
+                    $('#select-all').prop('checked', true);
+                } else {
+                    $('#select-all').prop('checked', false);
                 }
             });
         });

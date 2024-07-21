@@ -53,11 +53,31 @@ class User extends Authenticatable
 
     public function contributions()
     {
-        return $this->belongsToMany(Contribution::class,'user_contributions')->withTimestamps();
+        return $this->belongsToMany(Contribution::class, 'user_contributions')->withTimestamps();
     }
 
     public function payments()
     {
-        return $this->belongsToMany(Contribution::class,'pay_schedules')->withTimestamps();
+        return $this->belongsToMany(Contribution::class, 'pay_schedules')->withTimestamps();
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(Log::class)->orderBy('created_at', 'desc');
+    }
+
+    public function logsForContribution($contributionId)
+    {
+        return $this->logs()->ofContribution($contributionId);
+    }
+
+    public function getPaySchedulesForContribution($contributionId)
+    {
+        $payments = $this->pay_schedules()->where('contribution_id', $contributionId)->get();
+
+        if (!$payments) {
+            return collect();
+        }
+        return $payments;
     }
 }

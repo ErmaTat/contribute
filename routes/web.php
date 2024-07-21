@@ -5,6 +5,8 @@ use App\Http\Controllers\{
     DashboardController,
     ContributionController,
     PaymentController,
+    ReminderController,
+    ReportController,
     SettingController,
     UserController
 };
@@ -24,6 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/contribution/update/{id}', [ContributionController::class, 'update'])->name('contribution.update');
     Route::put('/payment/update', [ContributionController::class, 'update_pay'])->name('payment.update');
     Route::post('/InitiatePayment', [PaymentController::class, 'paymentGateway'])->name('payment.pay');
+    Route::get('/contribution/{id}/receipts', [PaymentController::class, 'receipt'])->name('payment.receipt');
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
+
+
 
 
 
@@ -34,10 +41,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::post('/assignrole', [UserController::class, 'assign_role'])->name('users.assign_role');
 
+    Route::post('/reminder/store', [ReminderController::class, 'store'])->name('reminder.store');
+
+
 
 
     Route::get('/settings', [SettingController::class, 'index'])->name('setting.index');
-    
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

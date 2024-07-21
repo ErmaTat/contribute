@@ -9,6 +9,7 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/sweetalert/sweetalert2.css')}}">
     {{-- <link rel="stylesheet" href="{{ asset('assets/bootstrap-4.0.0-dist/css/bootstrap.min.css')}}"> --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <!-- endinject -->
@@ -75,6 +76,7 @@
     <script src="{{ asset('assets/js/misc.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>
     <script src="{{ asset('assets/js/todolist.js') }}"></script>
+    <script src="{{ asset('assets/vendors/sweetalert/sweetalert2.js')}}"></script>
     @yield('scripts')
     <!-- endinject -->
     <!-- Custom js for this page -->

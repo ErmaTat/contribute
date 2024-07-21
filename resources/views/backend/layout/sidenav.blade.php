@@ -86,7 +86,7 @@
       </li>
 
       <li class="nav-item menu-items">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('report.index')}}">
           <span class="menu-icon">
             <i class="mdi mdi-chart-pie"></i>
           </span>
