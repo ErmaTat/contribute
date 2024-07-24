@@ -59,9 +59,12 @@
                             <p class="text-nowrap "><i class="mdi mdi-account-box bx-sm me-2"></i> Created By: </p>
                             <div class="text-nowrap "><button class="btn btn-sm btn-icon btn-outline-danger"> <i
                                         class="mdi mdi-delete bx-sm me-2 "></i></button>
-                                <button title="Reminders"
-                                    class="btn btn-sm btn-icon btn-outline-primary"data-target="#add-reminder"
-                                    data-toggle="modal" id="reminders"> <i class="mdi mdi-bell bx-sm me-2 "></i></button>
+                                <a href="{{route('contribution.settings',$contribution->id)}}">
+                                <button title="Reminders & Schedules"
+                                    class="btn btn-sm btn-icon btn-outline-primary"
+                                   id="reminder"> <i class="mdi mdi-settings bx-sm me-2 "></i>
+                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -170,8 +173,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-            
-                        <table class="table2 table table-bordered" style="display: none" id="calendar-table">
+                        <table class="table2 table table-bordered" id="calendar-table" style="display: none">
                             <thead>
                                 <tr>
                                     <th>User/Date</th>
@@ -184,36 +186,44 @@
                                 @foreach ($contribution->users as $user)
                                     <tr>
                                         <td>{{ $user->name }}</td>
-                                        @foreach ($raw_dates as $index => $raw_date)
+                                        @foreach ($raw_dates as $raw_date)
                                             @php
-                                                $totalAmount = 0;
-                                                $paid = false;
+                                                $status = 0; // Default to not paid
+                                                $payment = $contribution->pay_schedules->firstWhere('paid_on', $raw_date->format('Y-m-d'));
+                        
+                                                if ($payment && $payment->user_id == $user->id) {
+                                                    if ($payment->status == 1) {
+                                                        $status = 1; // Paid
+                                                    } elseif ($payment->status == 2) {
+                                                        $status = 2; // Missed
+                                                    }
+                                                }
                                             @endphp
-                                            <td
-                                                class="{{ $contribution->pay_schedules->contains(function ($payment) use ($raw_date, $user, $contribution) {
-                                                    return $payment->paid_on == $raw_date &&
-                                                        $payment->user_id == $user->id &&
-                                                        $payment->contribution_id == $contribution->id;
-                                                })
-                                                    ? 'bg-success'
-                                                    : '' }}">
-                                                @foreach ($contribution->pay_schedules as $payment)
-                                                    @if ($payment->paid_on == $raw_date && $user->id == $payment->user_id && $contribution->id == $payment->contribution_id)
-                                                        @php
-                                                            $totalAmount += $payment->amount;
-                                                            $paid = true;
-                                                        @endphp
+                                            @if ($contribution->contribution_type == 'recurring')
+                                                <td class="{{ $status == 1 ? 'bg-success' : ($status == 2 ? 'bg-danger' : 'bg-warning') }}">
+                                                    @if ($status == 1)
+                                                        ₦ {{ number_format($payment->amount) }}
+                                                    @elseif ($status == 2)
+                                                        Missed
+                                                    @else
+                                                        Not Paid
                                                     @endif
-                                                @endforeach
-                                                @if ($paid)
-                                                    ₦ {{ number_format($totalAmount) }}
-                                                @endif
-                                            </td>
+                                                </td>
+                                            @else
+                                                <td class="{{ $status == 1 ? 'bg-success' : '' }}">
+                                                    @if ($status == 1)
+                                                        ₦ {{ number_format($payment->amount) }}
+                                                    @endif
+                                                </td>
+                                            @endif
                                         @endforeach
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -225,7 +235,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="edit-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{ $contribution->name }}</h5>
@@ -282,15 +292,15 @@
                         </div>
                         <hr>
 
-                        @if ($contribution->contribution_type == 'recurring')
+                        {{-- @if ($contribution->contribution_type == 'recurring')
                             <div id="con_options">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label class="col-form-label">Payment Frequency: </label>
                                             <select class="form-control" id="freq" name="frequency"
                                                 style="color: white">
-                                                <option value="none">None</option>
+                                                <option value="daily">daily</option>
                                                 <option value="weekly">Weekly</option>
                                                 <option value="monthly">Monthly</option>
                                                 <option value="quarterly">Quarterly</option>
@@ -299,25 +309,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Payment Duration : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <select class="form-control" id="" name="duration_type"
-                                                        style="color: white">
-                                                        <option>Days</option>
-                                                        <option>Weeks</option>
-                                                        <option>Months</option>
-                                                    </select>
-                                                </div>
-                                                <input type="number" value="30" class="form-control"
-                                                    name="duration" placeholder="Duration Amount" aria-label=""
-                                                    aria-describedby="basic-addon1">
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                   
                                 </div>
 
                                 <div class="row">
@@ -339,11 +331,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
-
-
-
-
+                        @endif --}}
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -430,9 +418,8 @@
             </div>
         </div>
     </div>
-
-
-    <div class="modal fade" id="add-reminder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- 
+<div class="modal fade" id="add-reminder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -502,7 +489,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 @endsection

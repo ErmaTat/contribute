@@ -80,4 +80,9 @@ class User extends Authenticatable
         }
         return $payments;
     }
+
+    public function schedules()
+    {
+        return $this->belongsToMany(Schedule::class, 'user_schedules')->withTimestamps();
+    }
 }

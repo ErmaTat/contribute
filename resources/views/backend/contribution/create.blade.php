@@ -47,11 +47,11 @@
                         <hr>
                         <div id="con_options">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col">
                                     <div class="form-group">
                                         <label class="col-form-label">Payment Frequency: </label>
-                                        <select class="form-control" id="freq" name="frequency" style="color: white">
-                                            <option value="none">None</option>
+                                        <select class="form-control" required id="freq" name="frequency" style="color: white">
+                                            <option value="daily">Daily</option>
                                             <option value="weekly">Weekly</option>
                                             <option value="monthly">Monthly</option>
                                             <option value="quarterly">Quarterly</option>
@@ -60,7 +60,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Payment Duration : </label>
                                         <div class="input-group">
@@ -78,14 +78,14 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Payment Type : </label>
-                                        <select class="form-control" id="pay_type" style="color: white">
+                                        <select class="form-control" required id="pay_type" style="color: white">
                                             <option value="fixed">Fixed Amount</option>
                                             <option value="custom">Custom/Random Amount</option>
                                         </select>
@@ -127,10 +127,10 @@
             if (type == 'recurring') {
                 var options = ` 
                 <div class="row">
-                                <div class="col-md-6">
+                                <div class="col">
                                     <div class="form-group">
                                         <label class="col-form-label">Payment Frequency: </label>
-                                        <select class="form-control" id="freq" name="frequency" style="color: white">
+                                        <select class="form-control" required id="freq" name="frequency" style="color: white">
                                             <option value="none">None</option>
                                             <option value="weekly">Weekly</option>
                                             <option value="monthly">Monthly</option>
@@ -140,25 +140,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Payment Duration : </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <select class="form-control" id="" name="duration_type"
-                                                    style="color: white">
-                                                    <option>Days</option>
-                                                    <option>Weeks</option>
-                                                    <option>Months</option>
-                                                </select>
-                                            </div>
-                                            <input type="number" value="30" class="form-control" name="duration"
-                                                placeholder="Duration Amount" aria-label=""
-                                                aria-describedby="basic-addon1">
-                                        </div>
-
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             <div class="row">
