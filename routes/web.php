@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/contributions/create', [ContributionController::class, 'create'])->name('contribution.create');
     Route::post('/contributions/store', [ContributionController::class, 'store'])->name('contribution.store');
     Route::get('/contribution/{id}', [ContributionController::class, 'show'])->name('contribution.show');
+    Route::get('/contribution/{id}/payments', [ContributionController::class, 'repayments'])->name('contribution.repayments');
     Route::put('/contribution/update/{id}', [ContributionController::class, 'update'])->name('contribution.update');
     Route::put('/payment/update', [ContributionController::class, 'update_pay'])->name('payment.update');
     Route::get('/contribution/{id}/reminders', [ContributionController::class, 'settings'])->name('contribution.settings');

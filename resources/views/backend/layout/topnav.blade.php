@@ -1,161 +1,798 @@
-<!-- partial:../../partials/_navbar.html -->
-<nav class="navbar p-0 fixed-top d-flex flex-row">
-    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../assets/images/logo-mini.svg"
-                alt="logo" /></a>
-    </div>
-    <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
+<div data-bs-theme="">
+    <nav class="navbar navbar-expand-lg" id="topnav">
+      <div class="container">
+    
+        <!-- Toggler -->
+        <button class="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="navbar-nav w-100">
-            <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                    <input type="text" class="form-control" placeholder="Search Contribution Code">
-                </form>
-            </li>
-        </ul>
-        <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item dropdown d-none d-lg-block">
-                <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown"
-                    aria-expanded="false" href="#">+ Create New Project</a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                    aria-labelledby="createbuttonDropdown">
-                    <h6 class="p-3 mb-0">Projects</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item" href="{{ route('contribution.create') }}">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-file-outline text-primary"></i>
-                            </div>
+    
+        <!-- Brand -->
+        <a class="navbar-brand me-auto" href="index.html">
+          <img src="{{ asset('assets/img/logo.svg')}}" alt="..." class="navbar-brand-img">
+        </a>
+    
+        <!-- Form -->
+        <form class="form-inline me-4 d-none d-lg-flex">
+          <div class="input-group input-group-rounded input-group-merge input-group-reverse" data-list='{"valueNames": ["name"]}'>
+    
+            <!-- Input -->
+            <input type="search" class="form-control dropdown-toggle list-search" data-bs-toggle="dropdown" placeholder="Search" aria-label="Search">
+    
+            <!-- Icon -->
+            <div class="input-group-text">
+              <i class="fe fe-search"></i>
+            </div>
+    
+            <!-- Menu -->
+            <div class="dropdown-menu dropdown-menu-card">
+              <div class="card-body">
+    
+                <!-- List group -->
+                <div class="list-group list-group-flush list-group-focus list my-n3">
+                  <a class="list-group-item" href="team-overview.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar">
+                          <img src="assets/img/avatars/teams/team-logo-1.jpg" alt="..." class="avatar-img rounded">
                         </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject ellipsis mb-1">Recurring Contributions</p>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Airbnb
+                        </h4>
+    
+                        <!-- Time -->
+                        <p class="small text-body-secondary mb-0">
+                          <span class="fe fe-clock"></span> <time datetime="2018-05-24">Updated 2hr ago</time>
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item" href="team-overview.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar">
+                          <img src="assets/img/avatars/teams/team-logo-2.jpg" alt="..." class="avatar-img rounded">
                         </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item" href="{{ route('contribution.create') }}">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-web text-info"></i>
-                            </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Medium Corporation
+                        </h4>
+    
+                        <!-- Time -->
+                        <p class="small text-body-secondary mb-0">
+                          <span class="fe fe-clock"></span> <time datetime="2018-05-24">Updated 2hr ago</time>
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item" href="project-overview.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-4by3">
+                          <img src="assets/img/avatars/projects/project-1.jpg" alt="..." class="avatar-img rounded">
                         </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject ellipsis mb-1">One Time Contributions</p>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Homepage Redesign
+                        </h4>
+    
+                        <!-- Time -->
+                        <p class="small text-body-secondary mb-0">
+                          <span class="fe fe-clock"></span> <time datetime="2018-05-24">Updated 4hr ago</time>
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item" href="project-overview.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-4by3">
+                          <img src="assets/img/avatars/projects/project-2.jpg" alt="..." class="avatar-img rounded">
                         </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('contribution.index') }}">
-                        <p class="p-3 mb-0 text-center">See all projects</p>
-                    </a>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Travels & Time
+                        </h4>
+    
+                        <!-- Time -->
+                        <p class="small text-body-secondary mb-0">
+                          <span class="fe fe-clock"></span> <time datetime="2018-05-24">Updated 4hr ago</time>
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item" href="project-overview.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-4by3">
+                          <img src="assets/img/avatars/projects/project-3.jpg" alt="..." class="avatar-img rounded">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Safari Exploration
+                        </h4>
+    
+                        <!-- Time -->
+                        <p class="small text-body-secondary mb-0">
+                          <span class="fe fe-clock"></span> <time datetime="2018-05-24">Updated 4hr ago</time>
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item" href="profile-posts.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar">
+                          <img src="assets/img/avatars/profiles/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Dianna Smiley
+                        </h4>
+    
+                        <!-- Status -->
+                        <p class="text-body small mb-0">
+                          <span class="text-success">●</span> Online
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item" href="profile-posts.html">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar">
+                          <img src="assets/img/avatars/profiles/avatar-2.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Title -->
+                        <h4 class="text-body text-focus mb-1 name">
+                          Ab Hadley
+                        </h4>
+    
+                        <!-- Status -->
+                        <p class="text-body small mb-0">
+                          <span class="text-danger">●</span> Offline
+                        </p>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
                 </div>
-            </li>
-
-            <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-view-grid"></i>
+    
+              </div>
+            </div> <!-- / .dropdown-menu -->
+    
+          </div>
+        </form>
+    
+        <!-- User -->
+        <div class="navbar-user">
+    
+          <!-- Dropdown -->
+          <div class="dropdown me-4 d-none d-lg-flex">
+    
+            <!-- Toggle -->
+            <a href="#" class="navbar-user-link" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="icon active">
+                <i class="fe fe-bell"></i>
+              </span>
+            </a>
+    
+            <!-- Menu -->
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
+              <div class="card-header">
+    
+                <!-- Title -->
+                <h5 class="card-header-title">
+                  Notifications
+                </h5>
+    
+                <!-- Link -->
+                <a href="#!" class="small">
+                  View all
                 </a>
-            </li>
-
-            <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                    data-toggle="dropdown">
-                    <i class="mdi mdi-bell"></i>
-                    <span class="count bg-danger"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                    aria-labelledby="notificationDropdown">
-                    <h6 class="p-3 mb-0">Notifications</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-calendar text-success"></i>
-                            </div>
+    
+              </div> <!-- / .card-header -->
+              <div class="card-body">
+    
+                <!-- List group -->
+                <div class="list-group list-group-flush list-group-activity my-n3">
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
                         </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject mb-1">Event today</p>
-                            <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Dianna Smiley</strong> shared your post with Ab Hadley, Adolfo Hess, and 3 others.
                         </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-settings text-danger"></i>
-                            </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-2.jpg" alt="..." class="avatar-img rounded-circle">
                         </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject mb-1">Settings</p>
-                            <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Ab Hadley</strong> reacted to your post with a 😍
                         </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-link-variant text-warning"></i>
-                            </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-3.jpg" alt="..." class="avatar-img rounded-circle">
                         </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject mb-1">Launch Admin</p>
-                            <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Adolfo Hess</strong> commented <blockquote class="mb-0">“I don’t think this really makes sense to do without approval from Johnathan since he’s the one...” </blockquote>
                         </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <p class="p-3 mb-0 text-center">See all notifications</p>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-4.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Daniela Dewitt</strong> subscribed to you.
+                        </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-5.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Miyah Myles</strong> shared your post with Ryu Duke, Glen Rouse, and 3 others.
+                        </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-6.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Ryu Duke</strong> reacted to your post with a 😍
+                        </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-7.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Glen Rouse</strong> commented <blockquote class="mb-0">“I don’t think this really makes sense to do without approval from Johnathan since he’s the one...” </blockquote>
+                        </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
+                  <a class="list-group-item text-reset" href="#!">
+                    <div class="row">
+                      <div class="col-auto">
+    
+                        <!-- Avatar -->
+                        <div class="avatar avatar-sm">
+                          <img src="assets/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+    
+                      </div>
+                      <div class="col ms-n2">
+    
+                        <!-- Content -->
+                        <div class="small">
+                          <strong>Grace Gross</strong> subscribed to you.
+                        </div>
+    
+                        <!-- Time -->
+                        <small class="text-body-secondary">
+                          2m ago
+                        </small>
+    
+                      </div>
+                    </div> <!-- / .row -->
+                  </a>
                 </div>
+    
+              </div>
+            </div> <!-- / .dropdown-menu -->
+    
+          </div>
+    
+          <!-- Dropdown -->
+          <div class="dropdown">
+    
+            <!-- Toggle -->
+            <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="assets/img/avatars/profiles/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
+            </a>
+    
+            <!-- Menu -->
+            <div class="dropdown-menu dropdown-menu-end">
+              <a href="profile-posts.html" class="dropdown-item">Profile</a>
+              <a href="account-general.html" class="dropdown-item">Settings</a>
+              <hr class="dropdown-divider">
+              <a href="sign-in.html" class="dropdown-item">Logout</a>
+            </div>
+    
+          </div>
+    
+        </div>
+    
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse me-lg-auto order-lg-first" id="navbar">
+    
+          <!-- Form -->
+          <form class="mt-4 mb-3 d-md-none">
+            <input type="search" class="form-control form-control-rounded" placeholder="Search" aria-label="Search">
+          </form>
+    
+          <!-- Navigation -->
+          <ul class="navbar-nav me-lg-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="topnavDashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Dashboards
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="topnavDashboards">
+                <li>
+                  <a class="dropdown-item active" href="index.html">
+                    Default
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="dashboard-project-management.html">
+                    Project Management
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="dashboard-ecommerce.html">
+                    E-Commerce
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
-                    <div class="navbar-profile">
-                        <img class="img-xs rounded-circle" src="../../assets/images/faces/face15.jpg" alt="">
-                        <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
-                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                    aria-labelledby="profileDropdown">
-                    <h6 class="p-3 mb-0">Profile</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-settings text-success"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject mb-1">Settings</p>
-                        </div>
+              <a class="nav-link dropdown-toggle " href="#" id="topnavPages" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Pages
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="topnavPages">
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavAccount" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavAccount">
+                    <a class="dropdown-item " href="account-general.html">
+                      General
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <a class="dropdown-item preview-item" href="{{route('logout')}}"
-                            onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-logout text-danger"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject mb-1">Log out</p>
-                            </div>
-
-
-                        </a>
-                    </form>
-                    <div class="dropdown-divider"></div>
-                   
-                </div>
+                    <a class="dropdown-item " href="account-billing.html">
+                      Billing
+                    </a>
+                    <a class="dropdown-item " href="account-members.html">
+                      Members
+                    </a>
+                    <a class="dropdown-item " href="account-security.html">
+                      Security
+                    </a>
+                    <a class="dropdown-item " href="account-notifications.html">
+                      Notifications
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavCrm" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    CRM
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavCrm">
+                    <a class="dropdown-item " href="crm-contacts.html">
+                      Contacts
+                    </a>
+                    <a class="dropdown-item " href="crm-companies.html">
+                      Companies
+                    </a>
+                    <a class="dropdown-item " href="crm-deals.html">
+                      Deals
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavProfile" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profile
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavProfile">
+                    <a class="dropdown-item " href="profile-posts.html">
+                      Posts
+                    </a>
+                    <a class="dropdown-item " href="profile-groups.html">
+                      Groups
+                    </a>
+                    <a class="dropdown-item " href="profile-projects.html">
+                      Projects
+                    </a>
+                    <a class="dropdown-item " href="profile-files.html">
+                      Files
+                    </a>
+                    <a class="dropdown-item " href="profile-subscribers.html">
+                      Subscribers
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavProject" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Project
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavProject">
+                    <a class="dropdown-item " href="project-overview.html">
+                      Overview
+                    </a>
+                    <a class="dropdown-item " href="project-files.html">
+                      Files
+                    </a>
+                    <a class="dropdown-item " href="project-reports.html">
+                      Reports
+                    </a>
+                    <a class="dropdown-item " href="project-new.html">
+                      New project
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavTeam" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Team
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavTeam">
+                    <a class="dropdown-item " href="team-overview.html">
+                      Overview
+                    </a>
+                    <a class="dropdown-item " href="team-projects.html">
+                      Projects
+                    </a>
+                    <a class="dropdown-item " href="team-members.html">
+                      Members
+                    </a>
+                    <a class="dropdown-item " href="team-new.html">
+                      New team
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavFeed" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Feed
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavFeed">
+                    <a class="dropdown-item " href="feed.html">
+                      Platform
+                    </a>
+                    <a class="dropdown-item " href="social-feed.html">
+                      Social
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="wizard.html">
+                    Wizard
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="kanban.html">
+                    Kanban
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="orders.html">
+                    Orders
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="invoice.html">
+                    Invoice
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="pricing.html">
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="widgets.html">
+                    Widgets
+                  </a>
+                </li>
+              </ul>
             </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-            data-toggle="offcanvas">
-            <span class="mdi mdi-format-line-spacing"></span>
-        </button>
-    </div>
-</nav>
-<!-- partial -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="topnavAuth" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Auth
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="topnavAuth">
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle" href="#" id="topnavSignIn" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sign in
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavSignIn">
+                    <a class="dropdown-item" href="sign-in-cover.html">
+                      Cover
+                    </a>
+                    <a class="dropdown-item" href="sign-in-illustration.html">
+                      Illustration
+                    </a>
+                    <a class="dropdown-item" href="./sign-in-basics.html">
+                      Basic
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle" href="#" id="topnavSignUp" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sign up
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavSignUp">
+                    <a class="dropdown-item" href="sign-up-cover.html">
+                      Cover
+                    </a>
+                    <a class="dropdown-item" href="sign-up-illustration.html">
+                      Illustration
+                    </a>
+                    <a class="dropdown-item" href="sign-up.html">
+                      Basic
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle" href="#" id="topnavPassword" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Password reset
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavPassword">
+                    <a class="dropdown-item" href="password-reset-cover.html">
+                      Cover
+                    </a>
+                    <a class="dropdown-item" href="password-reset-illustration.html">
+                      Illustration
+                    </a>
+                    <a class="dropdown-item" href="password-reset.html">
+                      Basic
+                    </a>
+                  </div>
+                </li>
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle" href="#" id="topnavError" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Error
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavError">
+                    <a class="dropdown-item" href="error-illustration.html">
+                      Illustration
+                    </a>
+                    <a class="dropdown-item" href="error.html">
+                      Basic
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle " href="#" id="topnavDocumentation" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Docs
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="topnavDocumentation">
+                <li class="dropend">
+                  <a class="dropdown-item dropdown-toggle " href="#" id="topnavBasics" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Basics
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="topnavBasics">
+                    <a class="dropdown-item " href="docs/getting-started.html">
+                      Getting Started
+                    </a>
+                    <a class="dropdown-item " href="docs/design-file.html">
+                      Design File
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="docs/components.html">
+                    Components
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item " href="docs/changelog.html">
+                    Changelog
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasDemo" aria-controls="offcanvasDemo">
+                Customize
+              </a>
+            </li>
+          </ul>
+    
+        </div>
+    
+      </div> <!-- / .container -->
+    </nav>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

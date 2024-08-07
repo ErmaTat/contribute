@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+use function Laravel\Prompts\table;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
@@ -83,6 +85,9 @@ class User extends Authenticatable
 
     public function schedules()
     {
-        return $this->belongsToMany(Schedule::class, 'user_schedules')->withTimestamps();
+        return $this->belongsToMany(Schedule::class, 'user_schedules', 'user_id', 'schedule_id')
+        ->withPivot('status');
     }
+
+   
 }

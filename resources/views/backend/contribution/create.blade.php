@@ -1,113 +1,220 @@
 @extends('backend.layout.app')
 @section('title', 'New Project')
 @section('content')
-    <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">CreateNew Project</h4>
-                    <form class="forms-sample" method="POST" action="{{ route('contribution.store') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="project_name">Project Name *:</label>
-                            <input type="text" class="form-control" id="project_name" required name="name"
-                                placeholder="Project/Contribution Name">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-form-label">Starts *: </label>
-                                    <input class="form-control" type="date" required name="starts"
-                                        placeholder="dd/mm/yyyy" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group ">
-                                    <label class="col-form-label">Ends *: </label>
-                                    <input class="form-control" type="date" name="ends" required
-                                        placeholder="dd/mm/yyyy" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Project Description</label>
-                            <textarea class="form-control" name="description" placeholder="Project Description/Details" id="description"
-                                rows="4"></textarea>
-                        </div>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8">
 
+      <!-- Header -->
+      <div class="header mt-md-5">
+        <div class="header-body">
+          <div class="row align-items-center">
+            <div class="col">
 
-                        <div class="form-group">
-                            <label for="con_type">Project Contribution Type *: </label>
-                            <select class="form-control" id="con_type" required style="color: white"
-                                name="contribution_type">
-                                <option value="recurring">Recurring Contributions</option>
-                                <option value="one-time">One-Time Contributions</option>
-                            </select>
-                        </div>
-                        <hr>
-                        <div id="con_options">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Payment Frequency: </label>
-                                        <select class="form-control" required id="freq" name="frequency" style="color: white">
-                                            <option value="daily">Daily</option>
-                                            <option value="weekly">Weekly</option>
-                                            <option value="monthly">Monthly</option>
-                                            <option value="quarterly">Quarterly</option>
-                                            <option value="annually">Annually</option>
-                                        </select>
+              <!-- Pretitle -->
+              <h6 class="header-pretitle">
+                New contribution
+              </h6>
 
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Payment Duration : </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <select class="form-control" id="" name="duration_type"
-                                                    style="color: white">
-                                                    <option>Days</option>
-                                                    <option>Weeks</option>
-                                                    <option>Months</option>
-                                                </select>
-                                            </div>
-                                            <input type="number" value="30" class="form-control" name="duration"
-                                                placeholder="Duration Amount" aria-label=""
-                                                aria-describedby="basic-addon1">
-                                        </div>
+              <!-- Title -->
+              <h1 class="header-title">
+                Create a new contribution
+              </h1>
 
-                                    </div>
-                                </div> --}}
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Payment Type : </label>
-                                        <select class="form-control" required id="pay_type" style="color: white">
-                                            <option value="fixed">Fixed Amount</option>
-                                            <option value="custom">Custom/Random Amount</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Amount : </label>
-                                        <input type="text" class="form-control" value="500" id="amt"
-                                            name="amount" placeholder="Amount NGN">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                        <button class="btn btn-dark">Cancel</button>
-                    </form>
-                </div>
             </div>
+          </div> <!-- / .row -->
         </div>
+      </div>
+
+      <!-- Form -->
+      <form class="mb-4">
+
+        <!-- Project name -->
+        <div class="form-group">
+
+          <!-- Label  -->
+          <label class="form-label">
+            Contribution name
+          </label>
+
+          <!-- Input -->
+          <input type="text" class="form-control" name="name" required>
+
+        </div>
+
+        <!-- Project description -->
+        <div class="form-group">
+
+          <!-- Label -->
+          <label class="form-label mb-1">
+             Description
+          </label>
+
+          <!-- Text -->
+          <small class="form-text text-body-secondary">
+            What is the contribution for?
+          </small>
+
+          <!-- Textarea -->
+          <div data-quill=""></div>
+
+        </div>
+
+       
+        <div class="row">
+          <div class="col-12 col-md-6">
+
+            <!-- Start date -->
+            <div class="form-group">
+
+              <!-- Label -->
+              <label class="form-label">
+                Start date
+              </label>
+
+              <!-- Input -->
+              <input type="text" name="starts" class="form-control" data-flatpickr="">
+
+            </div>
+
+          </div>
+          <div class="col-12 col-md-6">
+
+            <!-- Start date -->
+            <div class="form-group">
+
+              <!-- Label -->
+              <label class="form-label">
+                End date
+              </label>
+
+              <!-- Input -->
+              <input type="text" name="ends" class="form-control" data-flatpickr="">
+
+            </div>
+
+          </div>
+        </div> <!-- / .row -->
+
+        <!-- Divider -->
+        <hr class="mt-4 mb-5">
+        <div class="row">
+          <div class="col-12 col-md-6">
+
+            <!-- Private project -->
+            <div class="form-group">
+
+              <!-- Label -->
+              <label class="form-label mb-1">
+                Recurring Contribution
+              </label>
+
+              <!-- Text -->
+              <small class="form-text text-body-secondary">
+                Recurring contributions can be automatically scheduled and reminders automatically assigned for payment dates.
+              </small>
+
+              <!-- Switch -->
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="switchOne">
+                <label class="form-check-label" for="switchOne"></label>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-12 col-md-6">
+
+            <!-- Warning -->
+            <div class="card bg-light border">
+              <div class="card-body">
+
+                <!-- Heading -->
+                <h4 class="mb-2">
+                  <i class="fe fe-alert-triangle"></i> Warning
+                </h4>
+
+                <!-- Text -->
+                <p class="small text-body-secondary mb-0">
+                  Once a contribution is set to recurring, payment dates cannot be adjusted.
+                </p>
+
+              </div>
+            </div>
+
+          </div>
+        </div> <!-- / .row -->
+        <div class="form-group">
+
+            <!-- Label  -->
+            <label class="form-label">
+              Payment Frequency
+            </label>
+  
+            <select class="form-select" name="frequency" data-choices>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="annually">Annually</option>
+            </select>
+          </div>
+
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+  
+              <!-- Start date -->
+              <div class="form-group">
+  
+                <!-- Label -->
+                <label class="form-label">
+                    Payment Type
+                </label>
+  
+                
+                <select class="form-select" id="pay_type">
+                    <option value="fixed">Fixed Amount</option>
+                    <option value="custom">Custom/Random Amount</option>
+                </select>
+                
+              </div>
+  
+            </div>
+            <div class="col-12 col-md-6">
+  
+              <!-- Start date -->
+              <div class="form-group">
+  
+                <!-- Label -->
+                <label class="form-label">
+                    Amount
+                </label>
+  
+                <!-- Input -->
+                <input type="number"  id="amt" name="amount" value="500" class="form-control" >
+  
+              </div>
+  
+            </div>
+          </div>
+        
+        <!-- Divider -->
+        <hr class="mt-5 mb-5">
+
+        <!-- Buttons -->
+        <a href="#" class="btn w-100 btn-primary">
+          Create project
+        </a>
+        <a href="#" class="btn w-100 btn-link text-body-secondary mt-2">
+          Cancel this project
+        </a>
+
+      </form>
+
     </div>
+  </div>
+   <!-- / .row -->
+   
 @endsection
 @section('scripts')
     <script>

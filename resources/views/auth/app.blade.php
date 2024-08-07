@@ -1,47 +1,48 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-bs-theme="">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/favicon/favicon.ico')}}" type="image/x-icon">
+    
+    <!-- Map CSS -->
+    <link rel="stylesheet" href="mapbox-gl-js/v0.53.0/mapbox-gl.css">
+    
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/libs.bundle.css')}}">
+    
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/theme.bundle.css')}}">
+    
+    <style>body { display: none; }</style>
+    
+    <!-- Title -->
     <title>@yield('title')</title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css')}}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png')}}" />
-    @yield('css')
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="{{ asset('gtag/js?id=UA-156446909-1')}}"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-156446909-1");</script>
   </head>
-  <body>
-    <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-        @yield('content')
-      
-        <!-- row ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{{ asset('assets/js/off-canvas.js')}}"></script>
-    <script src="{{ asset('assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{ asset('assets/js/misc.js')}}"></script>
-    <script src="{{ asset('assets/js/settings.js')}}"></script>
-    <script src="{{ asset('assets/js/todolist.js')}}"></script>
-    @yield('scripts')
-    <!-- endinject -->
+  <body class="d-flex align-items-center bg-auth border-top border-top-2 border-primary">
+
+    <!-- CONTENT
+    ================================================== -->
+    <div class="container">
+      @yield('content')
+    </div> <!-- / .container -->
+
+    <!-- JAVASCRIPT -->
+    <!-- Map JS -->
+    <script src='{{ asset('mapbox-gl-js/v0.53.0/mapbox-gl.js')}}'></script>
+    
+    <!-- Vendor JS -->
+    <script src="{{ asset('assets/js/vendor.bundle.js')}}"></script>
+    
+    <!-- Theme JS -->
+    <script src="{{ asset('assets/js/theme.bundle.js')}}"></script>
+
   </body>
 </html>

@@ -1,57 +1,100 @@
 @extends('auth.app')
-@section('title', 'Login')
+@section('title', 'Sign In')
 @section('css')
 @endsection
 @section('content')
-    <div class="row w-100 m-0">
-        <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
-            <div class="card col-lg-4 mx-auto">
-                <div class="card-body px-5 py-5">
-                    <h3 class="card-title text-left mb-3">Login</h3>
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label>Email *</label>
-                            <input class="form-control p_input" type="email" required="" name="email"
-                                value="{{ old('email') }}" placeholder="Test@gmail.com">
-                            @if ($errors->has('email'))
-                                <span class="text-danger mt-2">{{ $errors->first('email') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label>Password *</label>
-                            <input class="form-control p_input" type="password" name="password" required=""
-                                placeholder="*********">
-                            @if ($errors->has('password'))
-                                <span class="text-danger mt-2">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group d-flex align-items-center justify-content-between">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input"> Remember me </label>
-                            </div>
-                            @if (Route::has('password.request'))
-                                <a class="link forgot-pass" href="{{ route('password.request') }}">Forgot password?</a>
-                            @endif
+<div class="row align-items-center">
+    <div class="col-12 col-md-6 offset-xl-2 offset-md-1 order-md-2 mb-5 mb-md-0">
 
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
-                        </div>
-                        <div class="d-flex">
-                            <button class="btn btn-facebook mr-2 col">
-                                <i class="mdi mdi-facebook"></i> Facebook </button>
-                            <button class="btn btn-google col">
-                                <i class="mdi mdi-google-plus"></i> Google plus </button>
-                        </div>
-                        <p class="sign-up">Don't have an Account?<a href="#"> Sign Up</a></p>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- content-wrapper ends -->
+      <!-- Image -->
+      <div class="text-center">
+        <img src="assets/img/illustrations/happiness.svg" alt="..." class="img-fluid">
+      </div>
+
     </div>
+    <div class="col-12 col-md-5 col-xl-4 order-md-1 my-5">
+
+      <!-- Heading -->
+      <h1 class="display-4 text-center mb-3">
+        Sign in
+      </h1>
+
+      <!-- Subheading -->
+      <p class="text-body-secondary text-center mb-5">
+        Free access to our dashboard.
+      </p>
+
+      <!-- Form -->
+      <form method="POST" action="{{ route('login') }}">
+                        @csrf
+        <!-- Email address -->
+        <div class="form-group">
+
+          <!-- Label -->
+          <label class="form-label">
+            Email Address
+          </label>
+
+          <!-- Input -->
+          <input type="email" name="email"  value="{{ old('email') }}" required class="form-control" placeholder="name@address.com">
+            @if ($errors->has('email'))
+                <span class="text-danger mt-2">{{ $errors->first('email') }}</span>
+            @endif
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+
+              <!-- Label -->
+              <label class="form-label">
+                Password
+              </label>
+
+            </div>
+            <div class="col-auto">
+
+              <!-- Help text -->
+              <a href="password-reset-cover.html" class="form-text small text-body-secondary">
+                Forgot password?
+              </a>
+
+            </div>
+          </div> <!-- / .row -->
+
+          <!-- Input group -->
+          <div class="input-group input-group-merge">
+
+            <!-- Input -->
+            <input class="form-control" required type="password" name="password" placeholder="Enter your password">
+            @if ($errors->has('password'))
+                <span class="text-danger mt-2">{{ $errors->first('password') }}</span>
+            @endif
+            <!-- Icon -->
+            <span class="input-group-text">
+              <i class="fe fe-eye"></i>
+            </span>
+
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-lg w-100 btn-primary mb-3">
+          Sign in
+        </button>
+
+        <!-- Link -->
+        <div class="text-center">
+          <small class="text-body-secondary text-center">
+            Don't have an account yet? <a href="{{route('register')}}">Sign up</a>.
+          </small>
+        </div>
+
+      </form>
+
+    </div>
+  </div> <!-- / .row -->
 @endsection
 @section('scripts')
 @endsection
