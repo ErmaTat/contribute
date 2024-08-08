@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     ProfileController,
     DashboardController,
     ContributionController,
+    InviteController,
     PaymentController,
     ReminderController,
     ReportController,
@@ -46,12 +47,23 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/reminder/store', [ReminderController::class, 'store'])->name('reminder.store');
-    Route::get('/settings', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('/settings/users', [SettingController::class, 'users'])->name('settings.users');
+    Route::get('/settings/security', [SettingController::class, 'security'])->name('settings.security');
+    Route::get('/settings/notifications', [SettingController::class, 'notifications'])->name('settings.notifications');
+    Route::get('/settings/application', [SettingController::class, 'app'])->name('settings.app');
+
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::post('/send_invite',[InviteController::class,'invite'])->name('invite.user');
+    Route::post('/decision/{decision}/{invite}', [InviteController::class, 'decision'])->name('invite.decision');
+
 });
 
 require __DIR__.'/auth.php';

@@ -44,4 +44,15 @@ class Contribution extends Model
         return $this->hasMany(Schedule::class);
     }
     
+    public function userSchedules()
+    {
+        return $this->belongsToMany(User::class, 'user_schedules')
+                    ->withPivot('status');
+    }
+
+    public function invitations()
+    {
+        return $this->belongsToMany(User::class, 'invites', 'contribution_id', 'user_id')
+        ->withPivot('status');
+    }
 }

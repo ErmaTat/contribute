@@ -12,11 +12,13 @@ class Schedule extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_schedules')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_schedules')->withPivot('status');
     }
 
     public function contribution()
     {
         return $this->belongsTo(Contribution::class)->withTimestamps();
     }
+
+    
 }

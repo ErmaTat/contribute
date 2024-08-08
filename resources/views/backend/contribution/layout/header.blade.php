@@ -8,7 +8,11 @@
                     <h4 class="card-header-title" id="exampleModalCenterTitle">
                         Add a contributor
                     </h4>
-
+                    <div class="alert alert-danger alert-dismissible fade show" id="error_block" role="alert"
+                        style="position: absolute;right:10px;top:10px;display:none">
+                        <span id="err"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <!-- Close -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -25,7 +29,7 @@
                         </div>
 
 
-                        
+
                     </form>
 
                 </div>
@@ -37,7 +41,6 @@
                             <li class="list-group-item">
                                 <div class="row align-items-center">
                                     <div class="col ms-n2">
-
                                         <!-- Title -->
                                         <h4 class="mb-1 name">
                                             <a href="profile-posts.html">{{ $user->name }}</a>
@@ -45,9 +48,44 @@
                                     </div>
                                     <div class="col-auto">
 
-                                        <a href="#!" class="btn btn-sm btn-white">
-                                            Add
-                                        </a>
+                                        @php
+                                            // Check for any invite related to the current contribution
+                                            $invitesForCurrentContribution = $user->invitations->where(
+                                                'pivot.contribution_id',
+                                                $contribution->id,
+                                            );
+                                            $hasPendingOrAcceptedInvite = $invitesForCurrentContribution
+                                                ->whereIn('pivot.status', [0, 1])
+                                                ->isNotEmpty();
+                                            $hasDeclinedInvite = $invitesForCurrentContribution
+                                                ->where('pivot.status', 2)
+                                                ->isNotEmpty();
+                                        @endphp
+
+                                        @if ($hasPendingOrAcceptedInvite)
+                                            @foreach ($invitesForCurrentContribution as $invite)
+                                                @if ($invite->pivot->status == 0)
+                                                    <button class="btn btn-sm btn-white invite"
+                                                        data-id="{{ $user->id }}"
+                                                        data-cont_id="{{ $contribution->id }}" disabled>
+                                                        Invite Sent <i class="fe fe-check-circle"></i>
+                                                    </button>
+                                                @elseif ($invite->pivot->status == 1)
+                                                    <button class="btn btn-sm btn-white invite"
+                                                        data-id="{{ $user->id }}"
+                                                        data-cont_id="{{ $contribution->id }}" disabled>
+                                                        Invite Accepted <i class="fe fe-check-circle"></i>
+                                                    </button>
+                                                @endif
+                                            @endforeach
+                                        @elseif ($hasDeclinedInvite || $invitesForCurrentContribution->isEmpty())
+                                            <button class="btn btn-sm btn-white invite" data-id="{{ $user->id }}"
+                                                data-cont_id="{{ $contribution->id }}">
+                                                Invite
+                                            </button>
+                                        @endif
+
+
                                     </div>
                                 </div>
                             </li>
@@ -87,22 +125,34 @@
 
                     <!-- Avatar group -->
                     <div class="avatar-group">
-                        <a href="profile-posts.html" class="avatar" data-bs-toggle="tooltip" title="Dianna Smiley">
-                            <img src="assets/img/avatars/profiles/avatar-1.jpg" alt="..."
-                                class="avatar-img rounded-circle">
-                        </a>
-                        <a href="profile-posts.html" class="avatar" data-bs-toggle="tooltip" title="Ab Hadley">
-                            <img src="assets/img/avatars/profiles/avatar-2.jpg" alt="..."
-                                class="avatar-img rounded-circle">
-                        </a>
-                        <a href="profile-posts.html" class="avatar" data-bs-toggle="tooltip" title="Adolfo Hess">
-                            <img src="assets/img/avatars/profiles/avatar-3.jpg" alt="..."
-                                class="avatar-img rounded-circle">
-                        </a>
-                        <a href="profile-posts.html" class="avatar" data-bs-toggle="tooltip" title="Daniela Dewitt">
-                            <img src="assets/img/avatars/profiles/avatar-4.jpg" alt="..."
-                                class="avatar-img rounded-circle">
-                        </a>
+                        @php
+                            $colors = [
+                                'bg-info',
+                                'bg-success',
+                                'bg-warning',
+                                'bg-danger',
+                                'bg-primary',
+                                'bg-secondary',
+                                'bg-light',
+                                'bg-dark',
+                            ];
+                        @endphp
+
+                        @foreach ($contribution->users as $user)
+                            @php
+                                $randomColor = $colors[array_rand($colors)];
+                            @endphp
+                            <a href="{{ route('users.show', $user->id) }}" class="avatar" data-bs-toggle="tooltip"
+                                title="{{ $user->name }}">
+                                <div class="avatar">
+                                    <span class="avatar-title rounded-circle {{ $randomColor }}">
+                                        {{ strtoupper(substr($user->name, 0, 2)) }}
+                                    </span>
+                                </div>
+                            </a>
+                        @endforeach
+
+
                     </div>
 
                     <!-- Button -->
@@ -155,5 +205,7 @@
                 $(this).addClass('active');
             }
         });
+
     });
 </script>
+<script src="{{ asset('assets/js/invite.js') }}"></script>

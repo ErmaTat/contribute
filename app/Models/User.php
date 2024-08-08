@@ -89,5 +89,11 @@ class User extends Authenticatable
         ->withPivot('status');
     }
 
+    public function invitations()
+    {
+        return $this->belongsToMany(Contribution::class, 'invites', 'user_id', 'contribution_id')
+                    ->withPivot('status','created_at','id');
+    }
+
    
 }

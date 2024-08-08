@@ -27,6 +27,24 @@ class ContributionController extends Controller
         return $randomPassword;
     }
 
+    private function the_sum($contribution){
+        if ($contribution->contribution_type == 'recurring') {
+            $cont = Contribution::with(['schedules.users' => function ($query) {
+                $query->where('user_schedules.status', 1);
+            }])->findOrFail($contribution->id);
+
+            $sum = $cont->schedules->flatMap(function ($schedule) {
+                return $schedule->users->map(function ($user) use ($schedule) {
+                    return $schedule->amount; // Return amount for each schedule where status is paid
+                });
+            })->sum();
+
+        } else {
+            $sum = $contribution->pay_schedules->sum('amount');
+        }
+        return $sum;
+    }
+
     public function index()
     {
         $data = [
@@ -96,10 +114,13 @@ class ContributionController extends Controller
     {
         $contribution = Contribution::with('users', 'pay_schedules')->findOrFail($id);
         $logs = Log::where('contribution_id', $contribution->id)->orderBy('created_at', 'desc')->get();
+
+        $sum=$this->the_sum($contribution);
+        
         $data = [
             'contribution' => $contribution,
-            'users' => User::with('schedules')->get(),
-            'sum' => $contribution->pay_schedules->sum('amount'),
+            'users' => User::with('schedules', 'invitations')->get(),
+            'sum' => $sum,
             'logs' => $logs
         ];
 
@@ -107,7 +128,7 @@ class ContributionController extends Controller
     }
 
 
-    
+
     public function repayments(string $id)
     {
         $contribution = Contribution::with('users', 'pay_schedules')->findOrFail($id);
@@ -132,13 +153,14 @@ class ContributionController extends Controller
             }
         }
 
+        $sum=$this->the_sum($contribution);
         // $logs = Log::where('contribution_id', $contribution->id)->orderBy('created_at', 'desc')->get();
         $data = [
             'contribution' => $contribution,
             'dates' => $dates,
             'raw_dates' => $raw_dates,
-            'users' => User::with('schedules')->get(),
-            'sum' => $contribution->pay_schedules->sum('amount'),
+            'users' => User::with('schedules', 'invitations')->get(),
+            'sum' => $sum,
         ];
 
         return view('backend.contribution.repayments', $data);
@@ -204,9 +226,9 @@ class ContributionController extends Controller
 
     public function settings(string $id)
     {
-        $data=[
-            'contribution'=>Contribution::find($id)
+        $data = [
+            'contribution' => Contribution::find($id)
         ];
-        return view('backend.contribution.settings',$data);
+        return view('backend.contribution.settings', $data);
     }
 }

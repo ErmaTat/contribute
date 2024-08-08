@@ -92,7 +92,7 @@
   
         <ul class="navbar-nav mb-md-4">
           <li class="nav-item">
-            <a class="nav-link " href="{{route('contribution.index')}}">
+            <a class="nav-link " href="{{route('settings.index')}}">
               <i class="fe fe-settings"></i>Settings
             </a>
           </li>
@@ -101,7 +101,7 @@
         <ul class="navbar-nav mb-md-4">
           <li class="nav-item">
             <a class="nav-link " href="{{route('contribution.index')}}">
-              <i class="fe fe-users"></i>Users
+              <i class="fe fe-folder"></i>Getting Started
             </a>
           </li>
         </ul>
@@ -109,7 +109,7 @@
         <ul class="navbar-nav mb-md-4">
           <li class="nav-item">
             <a class="nav-link " href="{{route('contribution.index')}}">
-              <i class="fe fe-folder"></i>Getting Started
+              <i class="fe fe-rss"></i>Feedback & Support
             </a>
           </li>
         </ul>
